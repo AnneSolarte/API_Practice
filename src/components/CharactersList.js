@@ -27,6 +27,7 @@ export const CharacterList = () => {
     const newList = characters.map(element => ({
       id: element.id,
       name: element.name,
+      image: element.image,
       fav: false,
     }));
 
@@ -40,7 +41,7 @@ export const CharacterList = () => {
       if (character.id === id) {
         return {
           ...character,
-          fav: true,
+          fav: !(character.fav),
         };
       }
       return character;
@@ -51,18 +52,20 @@ export const CharacterList = () => {
   }
 
   return (
-    <div>
-      <h3>Character list</h3>
-      <ul>
+    <div className='box'>
+      <h2>Character list</h2>
+
+      <div className='content'>
         {listCharacter.map(character => (
-          <li key={character.id}>
-            {character.name}{" "}
-            <button onClick={() => addFav(character.id)}>
-              {character.fav ? "Fav" : "Add"}
-            </button>{" "}
-          </li>
+          <div key={character.id} className='card'>
+              <h3>{character.name}{" "}</h3>
+              <img src={character.image} />
+              <button onClick={() => addFav(character.id)}>{character.fav ? "Fav" : "Add"}</button>{" "}
+          </div>
+          
         ))}
-      </ul>
+      </div>
+        
     </div>
   );
 };
